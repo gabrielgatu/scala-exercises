@@ -4,11 +4,11 @@ object App extends App {
   class Utils[T](value: T) {
     implicit def print = println(value) }
 
-  trait Comprehension[T] {
-    def filter(predicate: T => Boolean)
+  trait Iterable[T] {
+    def filter(predicate: T => Boolean): Any
   }
 
-  class RichList[T](values: Seq[T]) extends Comprehension[T] {
+  class RichList[T](values: Seq[T]) extends Iterable[T] {
     private val list = values.foldLeft(List[T]()) { (list, elem) => elem :: list }.reverse
 
     override def toString = list.toString()
